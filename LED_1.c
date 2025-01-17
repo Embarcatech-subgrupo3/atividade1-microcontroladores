@@ -21,3 +21,15 @@ void init_teclado() {
     gpio_init(C1); gpio_set_dir(C1, GPIO_IN); gpio_pull_down(C1);
 }
 
+// Verifica o teclado e retorna a tecla pressionada
+char leitura_teclado() {
+    gpio_put(L1, 1);  // Ativa a linha 1
+    if (gpio_get(C1)) {  // Verifica se a tecla '1' foi pressionada
+        sleep_ms(50);  
+        while (gpio_get(C1));  // Espera até a tecla ser solta
+        gpio_put(L1, 0);  // Desativa a linha 1
+        return '1';  // Retorna a tecla '1'
+    }
+    gpio_put(L1, 0);  // Desativa a linha 1
+    return 0;  
+}
