@@ -16,7 +16,8 @@ void init_led()
 }
 
 // Inicializando os pinos do teclado
-void init_teclado() {
+void init_teclado() 
+{
     gpio_init(L1);            // Inicializa a linha 1
     gpio_set_dir(L1, GPIO_OUT);   // Define como saída
     gpio_put(L1, 0);          // Inicializa como baixo
@@ -27,7 +28,8 @@ void init_teclado() {
 }
 
 // Verifica o teclado e retorna se a tecla foi pressionada
-bool leitura_teclado() {
+bool leitura_teclado() 
+{
     gpio_put(L1, 1);          // Ativa a linha 1
     if (gpio_get(C2))         // Verifica se a tecla está pressionada
     {      
@@ -40,3 +42,22 @@ bool leitura_teclado() {
     return false;             // Retorna que nenhuma tecla foi pressionada
 }
 
+int main() 
+{
+    stdio_init_all();         // Inicializa a comunicação serial
+    init_led();               // Inicializa o LED
+    init_teclado();           // Inicializa o teclado
+
+    bool led_aceso = false;   // Variável para controlar o estado do LED
+
+    while (1) 
+    {
+        if (leitura_teclado()) // Verifica se a tecla foi pressionada
+        { 
+            led_aceso = !led_aceso;   // Alterna o estado do LED
+            gpio_put(LED_2, led_aceso); // Atualiza o LED
+            printf("LED 2 %s\n", led_aceso ? "aceso" : "apagado");
+        }
+        sleep_ms(100);      
+    }
+}
