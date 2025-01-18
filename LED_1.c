@@ -33,3 +33,26 @@ char leitura_teclado() {
     gpio_put(L1, 0);  // Desativa a linha 1
     return 0;  
 }
+
+int main() {
+    stdio_init_all();
+    init_led();
+    init_teclado();
+
+    bool led_aceso = false;  // Variável para controlar o estado do LED
+
+    while (1) {
+        char key = leitura_teclado();
+        if (key == '1') {
+            if (led_aceso) {
+                gpio_put(LED_1, 0);  // Apaga o LED 1
+                printf("LED 1 apagado\n");
+            } else {
+                gpio_put(LED_1, 1);  // Acende o LED 1
+                printf("LED 1 aceso\n");
+            }
+            led_aceso = !led_aceso;  // Alterna o estado do LED
+        }
+        sleep_ms(100); 
+    }
+}
