@@ -15,3 +15,28 @@ void init_led()
     gpio_put(LED_2, 0); // inicia apagado
 }
 
+// Inicializando os pinos do teclado
+void init_teclado() {
+    gpio_init(L1);            // Inicializa a linha 1
+    gpio_set_dir(L1, GPIO_OUT);   // Define como saída
+    gpio_put(L1, 0);          // Inicializa como baixo
+
+    gpio_init(C2);            // Inicializa a coluna 2
+    gpio_set_dir(C2, GPIO_IN);    // Define como entrada
+    gpio_pull_down(C2);       // Ativa resistor pull-down
+}
+
+// Verifica o teclado e retorna se a tecla foi pressionada
+bool leitura_teclado() {
+    gpio_put(L1, 1);          // Ativa a linha 1
+    if (gpio_get(C2))         // Verifica se a tecla está pressionada
+    {      
+        sleep_ms(50);         
+        while (gpio_get(C2)); // Espera a tecla ser solta
+        gpio_put(L1, 0);      // Desativa a linha 1
+        return true;          // Retorna que a tecla foi pressionada
+    }
+    gpio_put(L1, 0);          // Desativa a linha 1
+    return false;             // Retorna que nenhuma tecla foi pressionada
+}
+
