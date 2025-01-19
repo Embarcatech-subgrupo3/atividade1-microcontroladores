@@ -1,4 +1,3 @@
-
 #include "pico/stdlib.h"
 
 // Definições dos pinos GPIO
@@ -19,7 +18,7 @@ static const char teclas[4][4] = {
     {'*', '0', '#', 'D'}
 };
 
-// Função para inicializar o teclado matricial
+// Inicializa o teclado matricial
 void init_teclado() {
     gpio_init(L1); gpio_set_dir(L1, GPIO_OUT); gpio_put(L1, 0);
     gpio_init(L2); gpio_set_dir(L2, GPIO_OUT); gpio_put(L2, 0);
@@ -32,19 +31,19 @@ void init_teclado() {
     gpio_init(C4); gpio_set_dir(C4, GPIO_IN); gpio_pull_down(C4);
 }
 
-// Função para varrer o teclado e retornar a tecla pressionada
+// Varredura do teclado e retorno da tecla pressionada
 char leitura_teclado() {
     for (int row = 0; row < 4; row++) {
         gpio_put(L1 + row, 1);  // Ativa a linha correspondente
         for (int col = 0; col < 4; col++) {
             if (gpio_get(C1 + col)) {  // Verifica se a coluna está ativa
-                sleep_ms(50); 
-                while (gpio_get(C1 + col));  // Aguarda o botão ser liberado
-                gpio_put(L1 + row, 0);  // Desativa a linha
+                // sleep_ms(50);          // Debounce
+                while (gpio_get(C1 + col)); // Aguarda o botão ser liberado
+                gpio_put(L1 + row, 0); // Desativa a linha
                 return teclas[row][col];
             }
         }
         gpio_put(L1 + row, 0);  // Garante que a linha é desativada
     }
-    return 0;  // Retorna 0 se nenhuma tecla for pressionada
+    return 0; // Retorna 0 se nenhuma tecla for pressionada
 }
