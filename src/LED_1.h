@@ -52,7 +52,7 @@ int manter_led_1_ligado()
 
     gpio_put(L1, 0); // Desativa a linha 1
     
-    if (!i) printf("Led 1 apagado\n"); // Se não i for igual a 1, significa que
+    if (!i) printf("LED 1 apagado\n"); // Se não i for igual a 1, significa que
                                 // "LED 1 aceso" foi printado;
     return 0;
 }
