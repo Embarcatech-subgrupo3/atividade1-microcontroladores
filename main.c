@@ -3,6 +3,8 @@
 #include "./src/LED_1.h"
 #include "./src/LED_2.h"
 #include "./src/LED_3.h"
+#include "./src/LED_4.h"
+#include "./src/buzzer.h"
 
 int main()
 {
@@ -13,5 +15,7 @@ int main()
     led_1();
     led_2();
     led_3();
+    led_4();
+    buzzer();
   }
 }
