@@ -22,4 +22,19 @@ void init_teclado() {
     gpio_init(C4); gpio_set_dir(C4, GPIO_IN); gpio_pull_down(C4);
 }
 
-
+// Varredura do teclado e retorno da tecla pressionada
+char leitura_teclado() {
+    for (int row = 0; row < 4; row++) {
+        gpio_put(L1 + row, 1);
+        for (int col = 0; col < 4; col++) {
+            if (gpio_get(C1 + col)) {
+                sleep_ms(50); 
+                while (gpio_get(C1 + col));
+                gpio_put(L1 + row, 0);
+                return teclas[row][col];
+            }
+        }
+        gpio_put(L1 + row, 0);
+    }
+    return 0;
+}
