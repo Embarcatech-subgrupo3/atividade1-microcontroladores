@@ -10,7 +10,7 @@
 
 // Definições dos pinos do teclado
 #define CL4 1
-#define RL4 5
+#define RL4 8
 
 bool led_4_aceso = false; // Variável para controlar o estado do LED
 
