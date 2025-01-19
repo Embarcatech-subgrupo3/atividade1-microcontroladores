@@ -8,7 +8,7 @@
 
 // Definições dos pinos do teclado
 #define RL3 1 // ROW LED 3
-#define CL3 6 // COL LED 3
+#define CL3 7 // COL LED 3
 
 bool led_3_aceso = false; // Variável para controlar o estado do LED
 
