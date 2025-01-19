@@ -7,10 +7,10 @@
 #define LED_1 13
 
 // Definições dos pinos do teclado
-#define L1 1
-#define C1 8
+#define RL1 1 // ROW LED 1
+#define CL1 8 // COL LED 1
 
-bool led_aceso = false; // Variável para controlar o estado do LED
+bool led_1_aceso = false; // Variável para controlar o estado do LED
 
 // Inicializa o LED 1
 void init_led_1()
@@ -23,36 +23,36 @@ void init_led_1()
 // Inicializa o teclado
 void init_teclado_led_1()
 {
-    gpio_init(L1);
-    gpio_set_dir(L1, GPIO_OUT);
-    gpio_put(L1, 0);
-    gpio_init(C1);
-    gpio_set_dir(C1, GPIO_IN);
-    gpio_pull_down(C1);
+    gpio_init(CL1);
+    gpio_set_dir(CL1, GPIO_OUT);
+    gpio_put(CL1, 0);
+    gpio_init(CL1);
+    gpio_set_dir(CL1, GPIO_IN);
+    gpio_pull_down(CL1);
 }
 
 // Mantém o LED ligado enquanto o botão for pressionado
 int manter_led_1_ligado()
 {   
-    gpio_put(L1, 1); // Ativa a linha 1
-    int i = 1;
-    while (gpio_get(C1)) // enquanto o botão for pressionado
+    gpio_put(CL1, 1); // Ativa a linha 1
+    int i1 = 1;
+    while (gpio_get(CL1)) // enquanto o botão for pressionado
     {
-        if (!led_aceso)
+        if (!led_1_aceso)
         {   
             gpio_put(LED_1, true); // Acende o LED 1
-            if (i)
+            if (i1)
             {
                 printf("LED 1 aceso\n");
-                i = 0;
+                i1 = 0;
             }
         }
-        led_aceso = !led_aceso; // Alterna o estado do LED
+        led_1_aceso = !led_1_aceso; // Alterna o estado do LED
     }
 
-    gpio_put(L1, 0); // Desativa a linha 1
+    gpio_put(CL1, 0); // Desativa a linha 1
     
-    if (!i) printf("LED 1 apagado\n"); // Se não i for igual a 1, significa que
+    if (!i1) printf("LED 1 apagado\n"); // Se não i for igual a 1, significa que
                                 // "LED 1 aceso" foi printado;
     return 0;
 }
@@ -61,8 +61,8 @@ int led_1()
 {
     init_led_1();
     init_teclado_led_1();
-    int i = 1;
-    while (i--)
+    int i1 = 1;
+    while (i1--)
     {   
         manter_led_1_ligado();
         sleep_ms(100);
