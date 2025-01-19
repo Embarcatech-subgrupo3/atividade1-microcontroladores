@@ -57,11 +57,12 @@ int manter_led_1_ligado()
     return 0;
 }
 
-int led_1()
-{
-    init_led_1();
-    init_teclado_led_1();
-
-    manter_led_1_ligado();
-    sleep_ms(100);
+void led_1() {
+    led_1_aceso = !led_1_aceso; // Alterna o estado do LED
+    gpio_put(LED_1, led_1_aceso); // Atualiza o estado físico do LED
+    if (led_1_aceso) {
+        printf("LED 1 aceso\n");
+    } else {
+        printf("LED 1 apagado\n");
+    }
 }
