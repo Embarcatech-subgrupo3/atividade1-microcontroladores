@@ -69,11 +69,15 @@ int manter_led_4_ligado()
     return 0;
 }
 
-int led_4()
-{
-    init_led_4();
-    init_teclado_led_4();
+void led_4() {
+    led_4_aceso = !led_4_aceso; // Alterna o estado
+    gpio_put(LED_1, led_4_aceso);
+    gpio_put(LED_2, led_4_aceso);
+    gpio_put(LED_3, led_4_aceso);
 
-    manter_led_4_ligado();
-    sleep_ms(100);
+    if (led_4_aceso) {
+        printf("Todos os LEDs acesos\n");
+    } else {
+        printf("Todos os LEDs apagados\n");
+    }
 }
