@@ -38,7 +38,7 @@ int manter_led_2_ligado()
     int i2 = 1;
     while (gpio_get(CL2)) // enquanto o botão for pressionado
     {
-        if (!led_2_aceso && CL2 != '2')
+        if (!led_2_aceso)
         {   
             gpio_put(LED_2, true); // Acende o LED 2
             if (i2)
