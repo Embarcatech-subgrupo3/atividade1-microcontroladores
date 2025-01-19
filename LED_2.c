@@ -2,7 +2,7 @@
 #include "pico/stdlib.h"
 
 // Definindo o pino do led 2
-#define LED_2 14    
+#define LED_2 11    
 
 // Definindo pinos do teclado
 #define L1 1
