@@ -1,13 +1,12 @@
-# atividade1-microcontroladores
+# Atividade 1 - Microcontroladores
 Controle de pinos GPIO com o emprego de um teclado matricial.
 
 # Estrutura da equipe
 
-Líder:<br>
-Bruno Santos Fernandes
+Líder: Bruno Santos Fernandes
 
 Desenvolvedores:<br>
-Kayla Cristinny Silva Santana<br>
+Douglas Ramos <br>
 Lana Ramos Gomes<br>
 Luiz Gustavo do Valle Vieira<br>
 Matheus Félix Dias<br>
