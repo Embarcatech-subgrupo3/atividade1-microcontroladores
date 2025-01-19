@@ -61,10 +61,7 @@ int led_1()
 {
     init_led_1();
     init_teclado_led_1();
-    int i1 = 1;
-    while (i1--)
-    {   
-        manter_led_1_ligado();
-        sleep_ms(100);
-    }
+
+    manter_led_1_ligado();
+    sleep_ms(100);
 }

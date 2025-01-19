@@ -73,10 +73,7 @@ int led_4()
 {
     init_led_4();
     init_teclado_led_4();
-    int i4 = 1;
-    while (i4--)
-    {   
-        manter_led_4_ligado();
-        sleep_ms(100);
-    }
+
+    manter_led_4_ligado();
+    sleep_ms(100);
 }

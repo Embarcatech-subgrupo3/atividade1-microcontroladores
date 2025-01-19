@@ -59,10 +59,7 @@ int buzzer()
     ativar_buzzer();
     ativar_teclado();
 
-    int b = 1;
-    while (b--)
-    {   
-        ligar_buzzer();
-        sleep_ms(100);
-    }
+    ligar_buzzer();
+    sleep_ms(100);
+
 }
