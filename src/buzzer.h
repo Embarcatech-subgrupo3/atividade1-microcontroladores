@@ -5,8 +5,10 @@
 #define BUZZER 21
 
 // Definições dos pinos do teclado (tecla A)
-#define Linha1 8
-#define Coluna4 28
+#define Linha1 2
+#define Coluna4 5
+
+bool buz_on = false; // Estado inicial do buzzer (desligado)
 
 // Função para ativar o buzzer
 void ativar_buzzer()
@@ -24,53 +26,43 @@ void ativar_teclado()
 
     gpio_init(Coluna4);
     gpio_set_dir(Coluna4, GPIO_IN);
-    gpio_pull_up(Coluna4); // Ativa pull up na coluna
+    gpio_pull_down(Coluna4);
 }
 
 // Verifica o teclado e retorna a tecla pressionada
-int leitura_tecla()
+char ligar_buzzer()
 {
     gpio_put(Linha1, 1); // Ativa a linha 1
-    if (gpio_get(Coluna4))
-    {                 // Verifica se a tecla 'A' foi pressionada
-        sleep_ms(50); // Debounce
-        while (gpio_get(Coluna4))
-            ;                // Aguarda até a tecla ser solta
-        gpio_put(Linha1, 0); // Desativa a linha 1
-        return 'A';          // Retorna a tecla 'A'
+    int b = 1;
+    while (gpio_get(Coluna4)) // Se o botão for acionado
+    {   
+        if (!buz_on)
+        {
+            gpio_put(BUZZER, true); // Liga o buzzer
+            if (b)
+            {
+                printf("Buzzer tocou\n");
+                b = 0;
+            }
+        }
+        
+        buz_on = !buz_on;
     }
+
     gpio_put(Linha1, 0); // Desativa a linha 1
-    return 0;            // Retorna 0 se nenhuma tecla foi pressionada
+    
+    return 0;
 }
 
-int buzzer(bool buz_on)
-{
-    char tecla = leitura_tecla();
-    if (tecla == 'A')
-    { // Se a tecla 'A' foi pressionada alterar o estado atual do buzzer
-        if (buz_on)
-        {
-            gpio_put(BUZZER, 0); // Desliga o buzzer
-        }
-        else
-        {
-            gpio_put(BUZZER, 1); // Liga o buzzer
-        }
-        buz_on = !buz_on; // Alterna o estado do flag buzzer
-    }
-    sleep_ms(200); // Pequeno atraso para evitar repetições indesejadas
-    return buz_on;
-}
-
-int ligar_buzzer()
+int buzzer()
 {
     ativar_buzzer();
     ativar_teclado();
 
-    bool buz_on = true; // Estado inicial do buzzer (desligado)
-
-    while (true)
-    {
-        buzzer(buz_on);
+    int b = 1;
+    while (b--)
+    {   
+        ligar_buzzer();
+        sleep_ms(100);
     }
 }
