@@ -23,9 +23,9 @@ void init_led_1()
 // Inicializa o teclado
 void init_teclado_led_1()
 {
-    gpio_init(CL1);
-    gpio_set_dir(CL1, GPIO_OUT);
-    gpio_put(CL1, 0);
+    gpio_init(RL1);
+    gpio_set_dir(RL1, GPIO_OUT);
+    gpio_put(RL1, 0);
     gpio_init(CL1);
     gpio_set_dir(CL1, GPIO_IN);
     gpio_pull_down(CL1);
@@ -34,7 +34,7 @@ void init_teclado_led_1()
 // Mantém o LED ligado enquanto o botão for pressionado
 int manter_led_1_ligado()
 {   
-    gpio_put(CL1, 1); // Ativa a linha 1
+    gpio_put(RL1, 1); // Ativa a linha 1
     int i1 = 1;
     while (gpio_get(CL1)) // enquanto o botão for pressionado
     {
@@ -50,7 +50,7 @@ int manter_led_1_ligado()
         led_1_aceso = !led_1_aceso; // Alterna o estado do LED
     }
 
-    gpio_put(CL1, 0); // Desativa a linha 1
+    gpio_put(RL1, 0); // Desativa a linha 1
     
     if (!i1) printf("LED 1 apagado\n"); // Se não i for igual a 1, significa que
                                 // "LED 1 aceso" foi printado;
